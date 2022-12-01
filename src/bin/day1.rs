@@ -1,22 +1,26 @@
 use std::fs;
+use itertools::Itertools;
 
 fn main() {
     let input= fs::read_to_string("/Users/arthur.vanleeuwen/scratch/aoc2022/input/day1/input")
         .expect("Unable to read day 1 input");
 
-    let lines: Vec<&str> = input.lines().collect();
+    let lines = input.lines();
 
-    let elves = lines.split(|&line| line == "");
+    let elf_descriptors = lines
+        .group_by(|&line| line != "");
 
-    let elves: Vec<Vec<u32>> = elves.map(|elf| elf.iter().map(|&line| line.trim().parse::<u32>().expect("Invalid number of calories found")).collect() ).collect();
+    let elves = elf_descriptors
+        .into_iter()
+        .filter(|(drop,_)| *drop)
+        .map(|(_,elf)|  elf.map(|line| line.trim().parse::<u32>().expect("Invalid calorie count")));
 
-    let mut calorietotals: Vec<u32> = elves.iter().map(|elf| elf.iter().sum::<u32>()).collect();
+    let calorie_totals = elves
+        .map(|elf| elf.sum::<u32>())
+        .sorted_by(|a,b| b.cmp(a))
+        .take(3);
 
-    println!("{:?}", calorietotals.iter().max());
+    println!("{}", calorie_totals.clone().max().unwrap_or(0));
 
-    calorietotals.sort_by(|a,b| b.cmp(a));
-
-    let top = calorietotals.iter().take(3);
-
-    println!("{:?}", top.sum::<u32>());
+    println!("{}", calorie_totals.sum::<u32>());
 }
