@@ -10,3 +10,6 @@ itertools = "0.10.5"
 
 [[bin]]
 name = "day1"
+
+[[bin]]
+name = "day2"
