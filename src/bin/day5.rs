@@ -128,6 +128,10 @@ fn main() {
     let stacks = run_input_9000(&input);
 
     println!("{:#?}", String::from_iter(stacks.tops().iter()));
+
+    let stacks = run_input_9001(&input);
+
+    println!("{:#?}", String::from_iter(stacks.tops().iter()));
 }
 
 fn run_input_9000(input: &str) -> CrateStacks {
@@ -172,7 +176,7 @@ fn stack_parses() {
 }
 
 #[test]
-fn moves_crates_correctly() {
+fn moves_crates_correctly_9000() {
     let input =
 "    [D]    
 [N] [C]    
@@ -188,4 +192,23 @@ move 1 from 1 to 2";
 
     let result = run_input_9000(input).tops();
     assert_eq!(result, Vec::from(['C','M','Z']));
+}
+
+#[test]
+fn moves_crates_correctly_9001() {
+    let input =
+"    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2";
+
+    println!("{:#?}", run_input_9001(input));
+
+    let result = run_input_9001(input).tops();
+    assert_eq!(result, Vec::from(['M','C','D']));
 }
