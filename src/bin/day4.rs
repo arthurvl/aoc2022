@@ -25,6 +25,12 @@ fn contains(left: &ElfAssignment, right: &ElfAssignment) -> bool {
        left.0 <= right.0 && right.1 <= left.1 
 }
 
+fn overlaps(left: &ElfAssignment, right: &ElfAssignment) -> bool {
+        (right.0 <= left.1 && left.1 <= right.1)
+        ||
+        (left.0 <= right.1 && right.1 <= left.1)
+}
+
 fn main() {
     let input= fs::read_to_string("/Users/arthur.vanleeuwen/scratch/aoc2022/input/day4/input")
         .expect("Unable to read day 4 input");
@@ -35,7 +41,13 @@ fn main() {
         .map(extract_elf_pair);
 
     let duplicating_pairs = pairs
+        .clone()
         .filter(|(left,right)| contains(left,right) || contains(right,left));
 
     println!("{:#?}", duplicating_pairs.count());
+
+    let overlapping_pairs = pairs
+        .filter(|(left,right)| overlaps(left,right) || overlaps(right,left));
+
+    println!("{:#?}", overlapping_pairs.count());
 }
