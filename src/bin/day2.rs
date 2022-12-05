@@ -15,7 +15,7 @@ fn main() {
     ]);
 
     let input= fs::read_to_string("/Users/arthur.vanleeuwen/scratch/aoc2022/input/day2/input")
-        .expect("Unable to read day 1 input");
+        .expect("Unable to read day 2 input");
 
     let lines = input.lines();
 
