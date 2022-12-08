@@ -7,21 +7,3 @@ edition = "2021"
 
 [dependencies]
 itertools = "0.10.5"
-
-[[bin]]
-name = "day1"
-
-[[bin]]
-name = "day2"
-
-[[bin]]
-name = "day3"
-
-[[bin]]
-name = "day4"
-
-[[bin]]
-name = "day5"
-
-[[bin]]
-name = "day6"
