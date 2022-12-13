@@ -1,5 +1,4 @@
 use std::{fs, collections::{VecDeque, HashSet}};
-use itertools::Itertools;
 
 fn part1(input: &str) -> u32 {
     let (elevations, start, end) = elevation_field_for(input);
@@ -17,7 +16,7 @@ fn run_paths(elevations: Vec<Vec<i32>>,  mut coords: VecDeque<(usize, usize)>, e
     // analyze elevations field, find start and end
     for y in 0..elevations.len() {
         path_lengths.push(Vec::new());
-        for x in 0..elevations[y].len() {
+        for _ in 0..elevations[y].len() {
             path_lengths[y].push(u32::MAX);
         }
     };
@@ -100,7 +99,7 @@ fn elevation_field_for(input: &str) -> (Vec<Vec<i32>>,(usize,usize),(usize,usize
 }
 
 fn part2(input: &str) -> u32 {
-    let (elevations, start, end) = elevation_field_for(input);
+    let (elevations, _, end) = elevation_field_for(input);
 
     let startings: Vec<(usize,usize)> = elevations.iter()
         .enumerate()
